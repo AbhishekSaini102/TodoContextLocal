@@ -7,7 +7,11 @@ const TodoContext = createContext({
             title: "todo 1",
             completed: false,
         },
-        {},{}
+        {
+            id: 2,
+            title: "todo 2",
+            completed: false,
+        },{}
     ],
 });
 
