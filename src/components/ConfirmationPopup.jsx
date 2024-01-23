@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 
+// eslint-disable-next-line react/prop-types
 function ConfirmationPopup({ message, onConfirm, onCancel }) {
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center ">

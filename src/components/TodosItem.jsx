@@ -64,6 +64,7 @@ function TodoItem({ todo }) {
       <input
         type="checkbox"
         className="cursor-pointer rounded-lg bg-white"
+        // eslint-disable-next-line react/prop-types
         checked={todo.completed}
         onChange={toggleCompleted}
       />
