@@ -22,11 +22,20 @@ function App() {
     setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? {...prevTodo, completed: !prevTodo.completed} : prevTodo)))
   }
   
-    const toggleAllTodo = () => {
+    // const toggleAllTodo = () => {
+    //   setTodos(
+    //     todos.map((todo) => ({
+    //       ...todo,
+    //       completed: !todo.completed,
+    //     }))
+    //   );
+    // };
+
+    const toggleAllTodo = (completed) => {
       setTodos(
         todos.map((todo) => ({
           ...todo,
-          completed: !todo.completed,
+          completed: completed,
         }))
       );
     };

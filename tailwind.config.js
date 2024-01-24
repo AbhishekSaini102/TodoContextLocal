@@ -31,6 +31,7 @@ export default {
         "2rem": "2rem",
       },
       margin: {
+        42: "42px",
         22: "22px",
         21: "21px",
         20: "20px",

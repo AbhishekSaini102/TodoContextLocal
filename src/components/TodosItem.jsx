@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect, useRef } from "react";
 import { useTodoContext } from "../contexts/TodoContext";
@@ -60,7 +61,11 @@ function TodoItem({ todo }) {
   }, [showMenu]);
 
   return (
-    <div className="relative flex border border-black/10 rounded px-3 py-2 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black font-semibold">
+    <div
+      className={`relative flex border border-black/10 rounded px-3 py-2 gap-x-2 shadow-sm shadow-white/50 duration-300 text-black font-semibold ${
+        todo.completed ? "bg-green-200 " : "text-black"
+      }`}
+    >
       <input
         type="checkbox"
         className="cursor-pointer rounded-lg bg-white"
@@ -70,15 +75,12 @@ function TodoItem({ todo }) {
       />
       <input
         type="text"
-        className={`border-2 outline-none w-full bg-transparent rounded  ${
+        className={`border-1 outline-none w-full bg-transparent rounded  ${
           isTodoEditable
-            ? "border-green-500 bg-white rounded-lg py-2 px-4 shadow-md"
+            ? "border-green-400  bg-white rounded py-0 px-2 shadow-lg"
             : "border-transparent"
-        } ${
-          todo.completed
-            ? "line-through text-gray-500 bg-green-200"
-            : "text-black"
-        }`}
+        } ${todo.completed ? "line-through" : "text-red-500"}
+        `}
         value={todoMsg}
         onChange={(e) => setTodoMsg(e.target.value)}
         readOnly={!isTodoEditable}
@@ -86,33 +88,45 @@ function TodoItem({ todo }) {
 
       {isTodoEditable && (
         <button
-          className="bg-red-500 text-white px-2 py-1 rounded"
+          className="border-1 text-red-500 border-green-400 ring-neutral-50 bg-white rounded py-1 px-2 shadow-lg"
           onClick={editTodo}
         >
           Save
         </button>
       )}
 
-      {/* Dropdown Menu Button */}
-      <button onClick={() => setShowMenu(!showMenu)}>⋮</button>
+      <button
+        className="bg-white rounded-3xl px-4 py-1.5 hover:bg-[#efefef]"
+        onClick={() => setShowMenu(!showMenu)}
+      >
+        ⋮
+      </button>
 
       {/* Dropdown Menu */}
       {showMenu && (
         <div
           ref={menuRef}
-          className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg z-10"
+          className="absolute right-0 mt-42 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg z-10"
         >
           <button
-            className={`w-full px-4 py-2 text-left hover:bg-gray-200 ${
-              isTodoEditable ? "bg-red-500 text-white" : ""
+            className={`w-full px-4 py-2 text-left hover:bg-gray-200 text:black font-semibold items-center text- ${
+              isTodoEditable ? " text-black bg-gray-300 py-5" : " text-black "
             }`}
-            onClick={() => setIsTodoEditable(true)}
+            onClick={() => {
+              setIsTodoEditable(true);
+              setShowMenu(false);
+            }}
           >
-            {isTodoEditable ? "Save" : "Edit"}
+            {isTodoEditable ? "" : "Edit Todo"}
           </button>
+
           <button
-            className="w-full px-4 py-2 text-left bg-red-500 text-white hover:bg-gray-200"
-            onClick={handleDelete}
+            className="w-full px-4 py-2 text-left bg-white text-black rounded-b-md
+       hover:bg-red-500 hover:text-white text:black font-semibold"
+            onClick={() => {
+              handleDelete();
+              setShowMenu(false);
+            }}
           >
             Delete
           </button>

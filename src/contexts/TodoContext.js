@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createContext, useContext } from "react";
 
 const TodoContext = createContext({
@@ -9,7 +10,9 @@ const TodoContext = createContext({
         },
         
     ],
+    // eslint-disable-next-line no-unused-vars
     addTodo:(todo) => {},
+    // eslint-disable-next-line no-unused-vars
     deleteTodo:(id) => {},
     updateTodo:(id, todo) => {},
     toggleComplete:(id) => {},
