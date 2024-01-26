@@ -65,6 +65,14 @@ function App() {
     setTodos([])
   }
 
+  const markImportant = (id) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, important: !todo.important } : todo
+      );
+    });
+  };
+
 
  useEffect(() => {
    setFilteredSearchTodos(
@@ -109,6 +117,7 @@ function App() {
         setSearch,
         filteredSearchTodos,
         setFilteredSearchTodos,
+        markImportant,
       }}
     >
       <div className="bg-[#15803d] min-h-screen ">
@@ -132,7 +141,10 @@ function App() {
             <Fuction />
           </div>
 
-          {(search ? filteredSearchTodos : todos).map((todo) => {
+          {(search.toLowerCase() === "important"
+            ? todos.filter((todo) => todo.important)
+            : filteredSearchTodos
+          ).map((todo) => {
             const escapedSearch = search.replace(/\\/g, "\\\\"); // Add this line
             const regex = new RegExp(`(${escapedSearch})`, "gi"); // Use escapedSearch here
             const parts = todo.todo.split(regex);

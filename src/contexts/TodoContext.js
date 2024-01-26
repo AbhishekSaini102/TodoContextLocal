@@ -8,6 +8,7 @@ const TodoContext = createContext({
       todo: "todo 1",
       completed: false,
       date: new Date(),
+      important: false,
     },
   ],
   // eslint-disable-next-line no-unused-vars
@@ -16,6 +17,7 @@ const TodoContext = createContext({
   deleteTodo: (id) => {},
   updateTodo: (id, todo, date) => {},
   toggleComplete: (id) => {},
+  markImportant: (id) => {},
 
   // toggleTodo:(id) => {},
   // editTodo:(id, title) => {},
@@ -31,6 +33,7 @@ const TodoContext = createContext({
   setSearch: (search) => {},
   filteredSearchTodos: [],
   setFilteredSearchTodos: (filteredSearchTodos) => {},
+  
   // isDarkMode: false,
   // setIsDarkMode:(isDarkMode) => {},
   // isShowModal: false,

@@ -9,7 +9,8 @@ import "../customDatePickerStyles.css";
 
 
 
-function TodoItem({ todo }) {
+
+function TodoItem({ todo}) {
   const [isTodoEditable, setIsTodoEditable] = useState(false);
   const [todoMsg, setTodoMsg] = useState(todo.todo);
   const [showMenu, setShowMenu] = useState(false);
@@ -30,9 +31,14 @@ function TodoItem({ todo }) {
 
   const { search } = useTodoContext();
 
-  const { updateTodo, deleteTodo, toggleComplete } = useTodoContext();
+  const { updateTodo, deleteTodo, toggleComplete, markImportant} = useTodoContext();
 
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
+
+  
+
+
+
 
   const handleDelete = () => {
     setShowConfirmationPopup(true);
@@ -43,6 +49,8 @@ function TodoItem({ todo }) {
   //   setShowConfirmationPopup(false);
   // };
 
+
+  
   const handleConfirmDelete = () => {
     // Construct the key
     const key = `date-${todo.id}`;
@@ -103,6 +111,9 @@ function TodoItem({ todo }) {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [showMenu]);
+
+  
+
 
   // useEffect(() => {
   //   localStorage.setItem(todo.id, startDate.toString());
@@ -180,7 +191,7 @@ function TodoItem({ todo }) {
         <div className="w-full flex-row items-center justify-center ">
           <input
             type="text"
-            className={`border-1 outline-none w-full items-center h-3/4 bg-transparent rounded font-semibold text-base mt-2 ${
+            className={`border-1 outline-none w-full items-center h-3/4 bg-transparent rounded font-semibold text-base mt-0 ${
               isTodoEditable
                 ? "border-green-400  bg-white rounded py-0 px-2 shadow-lg"
                 : "border-transparent"
@@ -193,7 +204,7 @@ function TodoItem({ todo }) {
           />
 
           {startDate && (
-            <p className="font-normal text-xs text-gray-400 h-1/4 mt-101 ml-">
+            <p className="font-normal text-xs text-gray-400 h-1/4 mt-101 ">
               Tasks • {formattedDate}
             </p>
           )}
@@ -201,15 +212,29 @@ function TodoItem({ todo }) {
 
         {isTodoEditable && (
           <button
-            className="border-1 text-red-500 border-green-400 ring-neutral-50 bg-white rounded py-1 px-2 shadow-lg"
+            className="text-sm text-white  ring-neutral-50 bg-red-500 rounded 
+            py-1 px-2 h-2/4 shadow-lg"
             onClick={editTodo}
           >
             Save
           </button>
         )}
 
+        {/* <button
+          className={`star-icon ${
+            isImportant ? "text-yellow-500" : "text-gray-500"
+          }`}
+          onClick={() => setIsImportant(!isImportant)}
+        >
+          ⭐
+        </button> */}
+
+        {todo.important && (
+          <button className="star-icon text-yellow-500 ">⭐</button>
+        )}
+
         <button
-          className="bg-white rounded-3xl px-4 py-1.5 hover:bg-[#efefef]"
+          className="bg-white rounded-3xl px-4 py-1.5 4/4 hover:bg-[#efefef]"
           onClick={() => setShowMenu(!showMenu)}
         >
           ⋮
@@ -232,6 +257,17 @@ function TodoItem({ todo }) {
               }}
             >
               {isTodoEditable ? "" : "Edit Todo"}
+            </button>
+
+            <button
+              className="w-full px-4 py-2 text-left bg-white text-black 
+              hover:bg-yellow-400 hover:text-black text:black font-semibold text-base"
+              onClick={() => {
+                markImportant(todo.id);
+                setShowMenu(false);
+              }}
+            >
+              {todo.important ? "Unmark Important" : "Mark Important"}
             </button>
 
             {/* <DatePicker

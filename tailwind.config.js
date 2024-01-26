@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       height: {
+        23: "35px",
         22: "22px",
         21: "21px",
         20: "20px",
@@ -31,6 +32,7 @@ export default {
         "2rem": "2rem",
       },
       margin: {
+        102:"-10px",
         101:"-4px",
         42: "42px",
         22: "22px",

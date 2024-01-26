@@ -15,13 +15,30 @@ function TodoForm() {
   const [allCompleted, setAllCompleted] = useState(false);
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
+
+  const [filterImportant, setFilterImportant] = useState(false);
+
+  // useEffect(() => {
+  //   setFilteredSearchTodos(
+  //     todos.filter((todo) =>
+  //       todo.todo.toLowerCase().includes(search.toLowerCase())
+  //     )
+  //   );
+  // }, [todos, search, setFilteredSearchTodos]);
+
   useEffect(() => {
     setFilteredSearchTodos(
       todos.filter((todo) =>
-        todo.todo.toLowerCase().includes(search.toLowerCase())
+        filterImportant
+          ? todo.important
+          : todo.todo.toLowerCase().includes(search.toLowerCase())
       )
     );
-  }, [todos, search, setFilteredSearchTodos]);
+  }, [todos, search, filterImportant, setFilteredSearchTodos]);
+
+
+
+
 
   const handleToggleAll = () => {
     toggleAllTodo(!allCompleted);
@@ -104,6 +121,19 @@ function TodoForm() {
            focus:border-[#4d7c0f] focus:outline-none focus:ring-[#4d7c0f]
             placeholder-white hover:placeholder-[#6b6b6b]"
           />
+        </div>
+      )}
+
+      {todos.length > 1 && (
+        <div className="flex items-center py-1 px-2 rounded-lg bg-white  gap-x-1 
+        border h-23 border-green-600 ">
+          <input
+            type="checkbox"
+            checked={filterImportant}
+            onChange={(event) => setFilterImportant(event.target.checked)}
+            className="form-checkbox bg-green-600 mt-3 "
+          />
+          <label className=" text-green-700 font-medium bg-green-600rounded-lg ">Important</label>
         </div>
       )}
     </div>
