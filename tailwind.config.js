@@ -31,6 +31,7 @@ export default {
         "2rem": "2rem",
       },
       margin: {
+        101:"-4px",
         42: "42px",
         22: "22px",
         21: "21px",
@@ -54,6 +55,10 @@ export default {
         3: "3px",
         2: "2px",
         1: "1px",
+      },
+      width: {
+        "1rem": "1rem",
+        "62":"15.1rem",
       },
     },
   },
