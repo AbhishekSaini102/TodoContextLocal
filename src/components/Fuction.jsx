@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { useTodoContext } from "../contexts/TodoContext";
 import ConfirmationPopup from "./ConfirmationPopup"; // adjust the path as needed
