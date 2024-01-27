@@ -5,7 +5,9 @@ import { useTodoContext } from "../contexts/TodoContext";
 import ConfirmationPopup from './ConfirmationPopup'; // adjust the path as needed
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../customDatePickerStyles.css"; 
+// import logo from "../assets/react.svg";
+import logo from "../assets/Open.webp";
+
 
 
 
@@ -176,9 +178,10 @@ function TodoItem({ todo}) {
   
     return (
       <div
-        className={`relative flex border border-black/10 rounded px-3 py-2 gap-x-4 mb-8 shadow-sm shadow-white/50 duration-300 text-black font-semibold ${
-          todo.completed ? "bg-green-200 " : "text-black"
-        } ${search && todo.todo.includes(search) ? "bg-yellow-200" : ""}`}
+        className={`relative flex border border-black/10 rounded px-3 py-2 gap-x-4 mb-8 shadow-sm
+         shadow-white/50 duration-300 text-black font-semibold ${
+           todo.completed ? "bg-green-200 " : "text-black"
+         } ${search && todo.todo.includes(search) ? "bg-yellow-200" : ""}`}
       >
         <input
           type="checkbox"
@@ -191,7 +194,8 @@ function TodoItem({ todo}) {
         <div className="w-full flex-row items-center justify-center ">
           <input
             type="text"
-            className={`border-1 outline-none w-full items-center h-3/4 bg-transparent rounded font-semibold text-base mt-0 ${
+            className={`border-1 outline-none w-full items-center h-3/4 bg-transparent 
+            rounded font-semibold text-base mt-0 ${
               isTodoEditable
                 ? "border-green-400  bg-white rounded py-0 px-2 shadow-lg"
                 : "border-transparent"
@@ -230,11 +234,22 @@ function TodoItem({ todo}) {
         </button> */}
 
         {todo.important && (
-          <button className="star-icon text-yellow-500 ">⭐</button>
+          <button className="star-icon text-yellow-500 mr-101 ">⭐</button>
         )}
 
+        {/* <button
+          className={` px-1.5 py-1 mr-103 hover:rounded-md hover:bg-gray-100 text-white ${
+            todo.completed ? "bg-green-200 hover:bg-white " : "text-black"
+          } ${search && todo.todo.includes(search) ? "bg-yellow-200" : ""}`}
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          <img src={logo} alt="OpenLogo" height="30px" width="30px" />
+        </button> */}
+
         <button
-          className="bg-white rounded-3xl px-4 py-1.5 4/4 hover:bg-[#efefef]"
+          className={` rounded-3xl px-4 py-1.5 4/4 hover:bg-gray-100 ${
+            todo.completed ? "bg-green-200 " : "text-black"
+          } ${search && todo.todo.includes(search) ? "bg-yellow-200" : ""}`}
           onClick={() => setShowMenu(!showMenu)}
         >
           ⋮

@@ -120,7 +120,7 @@ function App() {
         markImportant,
       }}
     >
-      <div className="bg-[#15803d] min-h-screen ">
+      <div className="bg-[#15803d] min-h-screen z-20   ">
         {/* <div className="h-screen w-64 bg-green-700 border-r border-black flex flex-col justify-start p-5">
         <a href="#" className="text-white mb-2">Home</a>
         <a href="#" className="text-white mb-2">About</a>
@@ -129,15 +129,18 @@ function App() {
 
         <br />
 
-        <div className="w-full overflow-y-scroll ...  h-screen max-w-2xl bg-[#f8fafc] mx-auto shadow-md rounded-lg px-4 py-3 text-black mt-4 mb-9">
-          <h1 className="text-2xl font-bold text-center w-full px-4 py-2 rounded text-white mb-20 mt-2 bg-[#15803d] ">
-            Manage Your Todos
-          </h1>
-          <div className="mb-0">
+        <div className="flex flex-col w-full overflow-y-scroll ...  h-screen max-w-3xl  bg-[#f8fafc] mx-auto shadow-md rounded-lg px-4  text-black  mb-9 ticky top-14 ">
+          
+          <div className="flex sticky top-0 bg-white z-10 ...">
+            <h1 className="text-xl mt-12 font-bold text-center w-full px-4 py-2 rounded text-white mb-10  bg-[#15803d]  ">
+              Manage Your Todos
+            </h1>
+          </div>
+          <div className=" sticky top-[66px] bg-white z-10 ...">
             <TodoForm />
           </div>
 
-          <div className="">
+          <div className="sticky top-[125px] bg-white z-10 ...">
             <Fuction />
           </div>
 
@@ -150,7 +153,7 @@ function App() {
             const parts = todo.todo.split(regex);
 
             return (
-              <div key={todo.id} className="w-full ">
+              <div key={todo.id} className="w-full mt-3 ">
                 <TodosItem todo={todo}>
                   {parts.map((part, index) =>
                     part.toLowerCase() === escapedSearch.toLowerCase() ? (
@@ -165,6 +168,22 @@ function App() {
               </div>
             );
           })}
+
+          {/* <div className="animate-pulse text-gray-300 text-4xl font-sans px-12 py-20 text-center bg-[#f8fafc]">
+            Always go with the flow
+          </div> */}
+          <div className="text-green-400 text-xl font-sans px-12 py-20 text-center bg-[#f8fafc] border border-green-200 mt-12  mb-8">
+            “Productivity is never an accident. It is always the result of a
+            commitment to excellence, intelligent planning, and focused effort.”
+            - Paul J. Meyer
+          </div>
+
+          <div className="text-green-400 text-xl font-sans px-12 py-20 text-center bg-[#f8fafc] border border-green-200">
+            “You don’t have to see the whole staircase, just take the first
+            step.” - Martin Luther King Jr.
+          </div>
+
+          <div className="mb-64"></div>
         </div>
 
         {/* 
