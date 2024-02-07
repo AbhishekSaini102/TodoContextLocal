@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # Todo App
 
-Simple Todo App
+Simple Todo Local Storage App
