@@ -11,6 +11,8 @@ function TodoItem({ todo }) {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
+  const { search } = useTodoContext();
+
   const { updateTodo, deleteTodo, toggleComplete} = useTodoContext();
 
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
@@ -64,7 +66,7 @@ function TodoItem({ todo }) {
     <div
       className={`relative flex border border-black/10 rounded px-3 py-2 gap-x-2 shadow-sm shadow-white/50 duration-300 text-black font-semibold ${
         todo.completed ? "bg-green-200 " : "text-black"
-      }`}
+      } ${search && todo.todo.includes(search) ? "bg-yellow-200" : ""}`}
     >
       <input
         type="checkbox"
@@ -79,7 +81,12 @@ function TodoItem({ todo }) {
           isTodoEditable
             ? "border-green-400  bg-white rounded py-0 px-2 shadow-lg"
             : "border-transparent"
-        } ${todo.completed ? "line-through" : "text-red-500"}
+        } ${todo.completed ? "line-through text-red-600" : "text-black"}
+        ${
+          search && todo.todo.includes(search)
+            ? "text-black "
+            : ""
+        }
         `}
         value={todoMsg}
         onChange={(e) => setTodoMsg(e.target.value)}

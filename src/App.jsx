@@ -4,8 +4,11 @@ import { TodoProvider } from './contexts/TodoContext'
 import { TodoForm, TodosItem, Fuction}  from './components'
 
 
+
 function App() {
   const [todos, setTodos] = useState([])
+  const [search, setSearch] = useState('')
+  const [filteredSearchTodos, setFilteredSearchTodos] = useState([])
 
   const addTodo = (todo) => {
     setTodos((prev) => [{id: Date.now(), ...todo}, ...prev])
@@ -45,6 +48,16 @@ function App() {
   }
 
 
+ useEffect(() => {
+   setFilteredSearchTodos(
+     todos.filter((todo) =>
+       todo.todo.toLowerCase().includes(search.toLowerCase())
+     )
+   );
+ }, [search, todos]);
+
+
+
   useEffect(() => {
     // localStorage.setItem('todos', JSON.stringify(todos))
     // localStorage.setItem('todos', JSON.stringify(todos))
@@ -74,6 +87,10 @@ function App() {
         toggleComplete,
         deleteAllTodos,
         toggleAllTodo,
+        search,
+        setSearch,
+        filteredSearchTodos,
+        setFilteredSearchTodos,
       }}
     >
       <div className="bg-[#15803d] min-h-screen ">
@@ -89,7 +106,6 @@ function App() {
           <h1 className="text-2xl font-bold text-center w-full px-4 py-2 rounded text-white mb-20 mt-2 bg-[#15803d] ">
             Manage Your Todos
           </h1>
-
           <div className="mb-0">
             <TodoForm />
           </div>
@@ -98,20 +114,43 @@ function App() {
             <Fuction />
           </div>
 
-          
+          {(search ? filteredSearchTodos : todos).map((todo) => {
+            const escapedSearch = search.replace(/\\/g, "\\\\"); // Add this line
+            const regex = new RegExp(`(${escapedSearch})`, "gi"); // Use escapedSearch here
+            const parts = todo.todo.split(regex);
 
-          
-
-          <div className="flex flex-wrap gap-y-3">
-            {/* <TodosItem  /> */}
-            {todos.map((todo) => (
-              // <TodosItem key={todo.id} todo={todo} />
-              <div key={todo.id} className="w-full">
-                <TodosItem todo={todo} />
+            return (
+              <div key={todo.id} className="w-full gap">
+                <TodosItem todo={todo}>
+                  {parts.map((part, index) =>
+                    part.toLowerCase() === escapedSearch.toLowerCase() ? (
+                      <span key={index} className="">
+                        {part}
+                      </span>
+                    ) : (
+                      part
+                    )
+                  )}
+                </TodosItem>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
+
+        {/* 
+        this is another search fuction
+        <div className="flex flex-wrap gap-y-3">
+          {(search ? filteredSearchTodos : todos).map((todo) => (
+            <div
+              key={todo.id}
+              className={`w-full ${
+                todo.todo.includes(search) ? "bg-white" : ""
+              }`}
+            >
+              <TodosItem todo={todo} />
+            </div>
+          ))}
+        </div> */}
 
         <div className="h-40rem bg-[#000000] w-full ">
           <div className="h-22 bg-[#15803d] w-full mb-0"></div>
@@ -137,30 +176,6 @@ function App() {
           <div className="h-2 bg-[#15803d] w-full mb-20"></div>
           <div className="h-1 bg-[#15803d] w-full mb-21"></div>
           <div className="h-0 bg-[#15803d] w-full mb-22"></div>
-
-          {/* <div className="h-0 bg-[#15803d] w-full mb-0"></div>
-          <div className="h-1 bg-[#15803d] w-full mb-1"></div>
-          <div className="h-2 bg-[#15803d] w-full mb-2"></div>
-          <div className="h-3 bg-[#15803d] w-full mb-3"></div>
-          <div className="h-4 bg-[#15803d] w-full mb-4"></div>
-          <div className="h-5 bg-[#15803d] w-full mb-5"></div>
-          <div className="h-6 bg-[#15803d] w-full mb-6"></div>
-          <div className="h-7 bg-[#15803d] w-full mb-7"></div>
-          <div className="h-8 bg-[#15803d] w-full mb-8"></div>
-          <div className="h-9 bg-[#15803d] w-full mb-9"></div>
-          <div className="h-10 bg-[#15803d] w-full mb-10"></div>
-          <div className="h-11 bg-[#15803d] w-full mb-11"></div>
-          <div className="h-12 bg-[#15803d] w-full mb-12"></div>
-          <div className="h-13 bg-[#15803d] w-full mb-13"></div>
-          <div className="h-14 bg-[#15803d] w-full mb-14"></div>
-          <div className="h-15 bg-[#15803d] w-full mb-15"></div>
-          <div className="h-16 bg-[#15803d] w-full mb-16"></div>
-          <div className="h-17 bg-[#15803d] w-full mb-17"></div>
-          <div className="h-18 bg-[#15803d] w-full mb-18"></div>
-          <div className="h-19 bg-[#15803d] w-full mb-19"></div>
-          <div className="h-20 bg-[#15803d] w-full mb-20"></div>
-          <div className="h-21 bg-[#15803d] w-full mb-21"></div>
-          <div className="h-22 bg-[#15803d] w-full mb-22"></div> */}
         </div>
       </div>
     </TodoProvider>
