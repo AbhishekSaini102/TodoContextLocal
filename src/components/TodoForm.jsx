@@ -27,11 +27,11 @@ function TodoForm() {
   
 
     return (
-      <form onSubmit={add} className="flex">
+      <form onSubmit={add} className="flex  ">
         <input
           type="text"
-          placeholder="Write Todo..."
-          className="w-full border border-black/10 rounded-l  mb-10 px-3 h-3rem outline-none duration-150 bg-white/20 py-1.5  bg-green-600  hover:text-black transition  font-semibold hover:shadow-md  inline-block  "
+          placeholder="Add a task..."
+          className="w-full border border-black/10 rounded-l   mb-10 px-3 h-3rem outline-none duration-150 bg-white/20 py-1.5  bg-green-600  hover:text-black transition  font-semibold hover:shadow-md  inline-block  "
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
         />

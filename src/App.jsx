@@ -1,18 +1,40 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 // import './App.css' 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./customDatePickerStyles.css";
+
 import { TodoProvider } from './contexts/TodoContext'
 import { TodoForm, TodosItem, Fuction}  from './components'
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b2fc030075729ce356feb44a37eb95d24226a4ef
 function App() {
   const [todos, setTodos] = useState([])
   const [search, setSearch] = useState('')
   const [filteredSearchTodos, setFilteredSearchTodos] = useState([])
+<<<<<<< HEAD
+=======
+  const [startDate, setStartDate] = useState(new Date()); 
+
+  // const addTodo = (todo) => {
+  //   setTodos((prev) => [{id: Date.now(), ...todo}, ...prev])
+  // }
+
+  // const addTodo = (todo) => {
+  //   setTodos((prev) => [{ id: Date.now(), date: startDate, ...todo }, ...prev]);
+  // };
+>>>>>>> b2fc030075729ce356feb44a37eb95d24226a4ef
 
   const addTodo = (todo) => {
-    setTodos((prev) => [{id: Date.now(), ...todo}, ...prev])
-  }
+    setTodos((prev) => [{ id: Date.now(), date: startDate, ...todo }, ...prev]);
+  };
+
   const deleteTodo = (id) => {
     setTodos((prev) =>
       prev.filter((todo) => todo.id !== id)
@@ -21,6 +43,8 @@ function App() {
   const updateTodo = (id, todo) => {
     setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo)))
   }
+
+
   const toggleComplete = (id) => {
     setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? {...prevTodo, completed: !prevTodo.completed} : prevTodo)))
   }
@@ -46,6 +70,24 @@ function App() {
   const deleteAllTodos = () => {
     setTodos([])
   }
+
+  const markImportant = (id) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, important: !todo.important } : todo
+      );
+    });
+  };
+
+
+ useEffect(() => {
+   setFilteredSearchTodos(
+     todos.filter((todo) =>
+       todo.todo.toLowerCase().includes(search.toLowerCase())
+     )
+   );
+ }, [search, todos]);
+
 
 
  useEffect(() => {
@@ -91,9 +133,13 @@ function App() {
         setSearch,
         filteredSearchTodos,
         setFilteredSearchTodos,
+<<<<<<< HEAD
+=======
+        markImportant,
+>>>>>>> b2fc030075729ce356feb44a37eb95d24226a4ef
       }}
     >
-      <div className="bg-[#15803d] min-h-screen ">
+      <div className="bg-[#15803d] min-h-screen z-20   ">
         {/* <div className="h-screen w-64 bg-green-700 border-r border-black flex flex-col justify-start p-5">
         <a href="#" className="text-white mb-2">Home</a>
         <a href="#" className="text-white mb-2">About</a>
@@ -102,25 +148,47 @@ function App() {
 
         <br />
 
+<<<<<<< HEAD
         <div className="w-full overflow-y-scroll ...  h-screen max-w-2xl bg-[#f8fafc] mx-auto shadow-md rounded-lg px-4 py-3 text-black mt-4 mb-9">
           <h1 className="text-2xl font-bold text-center w-full px-4 py-2 rounded text-white mb-20 mt-2 bg-[#15803d] ">
             Manage Your Todos
           </h1>
           <div className="mb-0">
+=======
+        <div className="flex flex-col w-full overflow-y-scroll ...  h-screen max-w-3xl  bg-[#f8fafc] mx-auto shadow-md rounded-lg px-4  text-black  mb-9 ticky top-14 ">
+          
+          <div className="flex sticky top-0 bg-white z-10 ...">
+            <h1 className="text-xl mt-12 font-bold text-center w-full px-4 py-2 rounded text-white mb-10  bg-[#15803d]  ">
+              Manage Your Todos
+            </h1>
+          </div>
+          <div className=" sticky top-[66px] bg-white z-10 ...">
+>>>>>>> b2fc030075729ce356feb44a37eb95d24226a4ef
             <TodoForm />
           </div>
 
-          <div className="">
+          <div className="sticky top-[125px] bg-white z-10 ...">
             <Fuction />
           </div>
 
+<<<<<<< HEAD
           {(search ? filteredSearchTodos : todos).map((todo) => {
+=======
+          {(search.toLowerCase() === "important"
+            ? todos.filter((todo) => todo.important)
+            : filteredSearchTodos
+          ).map((todo) => {
+>>>>>>> b2fc030075729ce356feb44a37eb95d24226a4ef
             const escapedSearch = search.replace(/\\/g, "\\\\"); // Add this line
             const regex = new RegExp(`(${escapedSearch})`, "gi"); // Use escapedSearch here
             const parts = todo.todo.split(regex);
 
             return (
+<<<<<<< HEAD
               <div key={todo.id} className="w-full gap">
+=======
+              <div key={todo.id} className="w-full mt-3 ">
+>>>>>>> b2fc030075729ce356feb44a37eb95d24226a4ef
                 <TodosItem todo={todo}>
                   {parts.map((part, index) =>
                     part.toLowerCase() === escapedSearch.toLowerCase() ? (
@@ -135,6 +203,25 @@ function App() {
               </div>
             );
           })}
+<<<<<<< HEAD
+=======
+
+          {/* <div className="animate-pulse text-gray-300 text-4xl font-sans px-12 py-20 text-center bg-[#f8fafc]">
+            Always go with the flow
+          </div> */}
+          <div className="text-green-400 text-xl font-sans px-12 py-20 text-center bg-[#f8fafc] border border-green-200 mt-12  mb-8">
+            “Productivity is never an accident. It is always the result of a
+            commitment to excellence, intelligent planning, and focused effort.”
+            - Paul J. Meyer
+          </div>
+
+          <div className="text-green-400 text-xl font-sans px-12 py-20 text-center bg-[#f8fafc] border border-green-200">
+            “You don’t have to see the whole staircase, just take the first
+            step.” - Martin Luther King Jr.
+          </div>
+
+          <div className="mb-64"></div>
+>>>>>>> b2fc030075729ce356feb44a37eb95d24226a4ef
         </div>
 
         {/* 
